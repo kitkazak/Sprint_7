@@ -1,0 +1,15 @@
+[
+  {
+    "login": "nikitakazak_0",
+    "password": "passw0rd",
+    "firstName": "Nikita"
+  },
+  {
+    "login": "nikitakazak_1",
+    "password": "passw0rd"
+  },
+  {
+    "login": "nikitakazak_2",
+    "firstName": "Maxim"
+  }
+]
