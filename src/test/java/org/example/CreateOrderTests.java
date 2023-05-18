@@ -53,7 +53,6 @@ public class CreateOrderTests {
     @Description("Можно указать один из цветов — BLACK или GREY, указать оба цвета или не указывать их вообще. " +
         "При создании заказа должен возвращаться его трекинговый номер — track.")
     public void createOrderTest() {
-
         HashMap<String, Object> createOrderRequestBody = new HashMap<>();
 
         createOrderRequestBody.put("firstName", "Naruto");
@@ -77,8 +76,6 @@ public class CreateOrderTests {
                 .when().post("/orders");
 
         res.then().statusCode(201).and().body("$", hasKey("track"));
-
-
     }
 
 }
