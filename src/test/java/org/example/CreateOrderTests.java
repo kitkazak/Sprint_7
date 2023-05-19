@@ -2,11 +2,10 @@ package org.example;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.example.api.Orders;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -43,11 +42,6 @@ public class CreateOrderTests {
         });
     }
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/api/v1";
-    }
-
     @Test
     @DisplayName("Создание заказа")
     @Description("Можно указать один из цветов — BLACK или GREY, указать оба цвета или не указывать их вообще. " +
@@ -69,12 +63,7 @@ public class CreateOrderTests {
 
         createOrderRequestBody.put("color", colorJSONArray.toJSONString());
 
-        Response res = RestAssured
-                .given()
-                .header("Content-Type", "application/json")
-                .body((new JSONObject(createOrderRequestBody)).toJSONString())
-                .when().post("/orders");
-
+        Response res = Orders.Create(new JSONObject(createOrderRequestBody));
         res.then().statusCode(201).and().body("$", hasKey("track"));
     }
 
