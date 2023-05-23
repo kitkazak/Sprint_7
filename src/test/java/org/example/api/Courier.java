@@ -7,24 +7,24 @@ import org.example.paths.Paths;
 
 public class Courier {
 
-    public static Response Create(JSONObject body) {
+    public static Response create(JSONObject body) {
         return RestAssured
                 .given()
                 .header("Content-Type", "application/json")
                 .body(body.toJSONString())
-                .when().post(Paths.courier);
+                .when().post(Paths.COURIER);
     }
 
-    public static Response Login(JSONObject body) {
+    public static Response login(JSONObject body) {
         return RestAssured
                 .given()
                 .header("Content-Type", "application/json")
                 .body(body.toJSONString())
-                .when().post(Paths.courierLogin);
+                .when().post(Paths.COURIER_LOGIN);
     }
 
-    public static Response Delete(int id) {
-        return RestAssured
-                .delete(String.format(Paths.courier + "%d", id));
+    public static void delete(int id) {
+        RestAssured
+                .delete(String.format(Paths.COURIER + "%d", id));
     }
 }

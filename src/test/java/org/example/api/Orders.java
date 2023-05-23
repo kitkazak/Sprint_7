@@ -7,17 +7,17 @@ import org.json.simple.JSONObject;
 
 public class Orders {
 
-    public static Response Create(JSONObject body) {
+    public static Response create(JSONObject body) {
         return RestAssured
                 .given()
                 .header("Content-Type", "application/json")
                 .body((new JSONObject(body)).toJSONString())
-                .when().post(Paths.orders);
+                .when().post(Paths.ORDERS);
 
     }
 
-    public static Response GetAll() {
+    public static Response getAll() {
         return RestAssured
-                .get(Paths.orders);
+                .get(Paths.ORDERS);
     }
 }

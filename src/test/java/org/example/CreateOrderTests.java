@@ -63,7 +63,7 @@ public class CreateOrderTests {
 
         createOrderRequestBody.put("color", colorJSONArray.toJSONString());
 
-        Response res = Orders.Create(new JSONObject(createOrderRequestBody));
+        Response res = Orders.create(new JSONObject(createOrderRequestBody));
         res.then().statusCode(201).and().body("$", hasKey("track"));
     }
 

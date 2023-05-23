@@ -35,41 +35,41 @@ public class CreateCourierTests {
     @DisplayName("Курьера можно создать")
     @Description("Запрос возвращает правильный код ответа — 201. Успешный запрос возвращает \"ok\": true")
     public void createCourierIsPossible() {
-        Courier.Create(createCourierValidObj);
-        Response loginRes = Courier.Login(createCourierValidObj);
+        Courier.create(createCourierValidObj);
+        Response loginRes = Courier.login(createCourierValidObj);
 
         loginRes.then().statusCode(200);
         int courierId = loginRes.jsonPath().get("id");
 
-        Courier.Delete(courierId);
+        Courier.delete(courierId);
     }
 
     @Test
     @DisplayName("Нельзя создать двух одинаковых курьеров")
     @Description("Если создать пользователя с логином, который уже есть, возвращается ошибка")
     public void createCourierDuplicateIsNotPossible() {
-        Courier.Create(createCourierValidObj);
+        Courier.create(createCourierValidObj);
 
         // Create new courier with the same data
-        Response createRes = Courier.Create(createCourierValidObj);
+        Response createRes = Courier.create(createCourierValidObj);
         createRes.then()
                 .statusCode(409)
                 .and()
                 .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
 
-        Response loginRes = Courier.Login(createCourierValidObj);
+        Response loginRes = Courier.login(createCourierValidObj);
 
         loginRes.then().statusCode(200);
         int courierId = loginRes.jsonPath().get("id");
 
-        Courier.Delete(courierId);
+        Courier.delete(courierId);
     }
 
     @Test
     @DisplayName("Чтобы создать курьера, нужно передать в ручку все обязательные поля")
     @Description("Если одного из полей нет, запрос возвращает ошибку")
     public void createCourierAllFieldsRequired() {
-        Response createRes = Courier.Create(createCourierNotAllFieldsObj);
+        Response createRes = Courier.create(createCourierNotAllFieldsObj);
         createRes.then()
                 .statusCode(400)
                 .and()

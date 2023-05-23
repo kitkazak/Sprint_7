@@ -13,7 +13,7 @@ public class GetOrdersTests {
     @DisplayName("Получение списка заказов")
     @Description("В тело ответа должен возвращаться список заказов.")
     public void getOrdersTest() {
-        Response res = Orders.GetAll();
+        Response res = Orders.getAll();
         res.then().statusCode(200).and().body("$", hasKey("orders"));
     }
 }
